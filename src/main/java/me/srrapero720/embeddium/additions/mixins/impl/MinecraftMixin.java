@@ -1,4 +1,4 @@
-package me.authorname.examplemod.mixins.impl;
+package me.srrapero720.embeddium.additions.mixins.impl;
 
 import net.minecraft.client.Minecraft;
 import org.apache.logging.log4j.Marker;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.authorname.examplemod.ExampleMod.LOGGER;
+import static me.srrapero720.embeddium.additions.EmbeddiumAdditions.LOGGER;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {

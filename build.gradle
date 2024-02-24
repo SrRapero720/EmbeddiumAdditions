@@ -4,7 +4,6 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 java {
@@ -12,8 +11,7 @@ java {
 }
 
 base {
-    archivesName = modid
-    version = "mc${mcversion}-v${version}"
+    archivesName = modid_short + "-${mcversion}"
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
 
@@ -21,12 +19,6 @@ minecraft {
     mappings channel: mappingsch, version: mappings_version
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     copyIdeResources = true
-
-    // When true, this property will add the folder name of all declared run configurations to generated IDE run configurations.
-    // The folder name can be set on a run configuration using the "folderName" property.
-    // By default, the folder name of a run configuration is the name of the Gradle project containing it.
-    // generateRunFolders = true
-    // folderName = "example_mod"
 
     runs {
         // applies to all the run configs below
@@ -43,23 +35,7 @@ minecraft {
             }
         }
 
-        client {
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', modid
-        }
-
-        server {
-            property 'forge.enabledGameTestNamespaces', modid
-            args '--nogui'
-        }
-
-        data {
-            // example of overriding the workingDirectory set in configureEach above
-            workingDirectory file('run-data')
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', modid, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
+        client {}
     }
 }
 
@@ -83,18 +59,6 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-configurations {
-    shadeLibrary
-    implementation.extendsFrom shadeLibrary
-}
-
-/* TELLS FORGE TO IDENTIFY LIBRARY CLASSES  */
-minecraft.runs.all {
-    lazyToken('minecraft_classpath') {
-        configurations.shadeLibrary.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
-    }
-}
-
 dependencies {
     minecraft "net.minecraftforge:forge:${mcversion}-${fgversion}"
     annotationProcessor "net.fabricmc:sponge-mixin:${fabric_mixin_version}+mixin.${mixin_version}"
@@ -105,24 +69,18 @@ dependencies {
         jarJar.ranged(it, mixinextra_version_range)
     }
 
-    // UTILITY FOR FAST LOADING AND IN-DEV COMPAT RESOLUTIONS
-    runtimeOnly fg.deobf("curse.maven:jei-238222:${jeiversion}")
+    // DEPENDENCIES
+    implementation fg.deobf("org.embeddedt:embeddium-${mcversion}:${embeddiumversion}")
+    implementation fg.deobf("curse.maven:jei-238222:${jeiversion}")
     runtimeOnly fg.deobf("curse.maven:oculus-581495:${oculusversion}")
-    runtimeOnly fg.deobf("org.embeddedt:embeddium-${mcversion}:${embeddiumversion}")
+
+    // UTILITY FOR FAST LOADING AND IN-DEV COMPAT RESOLUTIONS
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:${worldeditversion}")
     runtimeOnly fg.deobf("curse.maven:ferritecore-429235:${ferritecoreversion}")
     runtimeOnly fg.deobf("curse.maven:fastload-630620:${fastloadversion}")
     runtimeOnly fg.deobf("curse.maven:spark-361579:${sparkversion}")
-
-    // Quick example
-    // implementation fg.deobf("curse.maven:00000-00000")
-
-    // Quick shadow example
-    // shadeLibrary "com.google:gson:2.0"
 }
 
-// A missing property will result in an error. Properties are expanded using ${} Groovy notation.
-// When "copyIdeResources" is enabled, this will also run before the game launches in IDE environments.
 tasks.processResources.outputs.upToDateWhen { false }
 tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta', "${modid}.${mixin_file_suffix}".toString()]) {
@@ -130,7 +88,6 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
@@ -144,24 +101,15 @@ tasks.named('jar', Jar).configure {
                 "MixinConfigs": "${modid}.${mixin_file_suffix}"
         ])
     }
-    from {
-        configurations.library.collect {
-            it.isDirectory() ? it.matching {
-                exclude '*', 'META-INF/**'
-            } : zipTree(it).matching {
-                exclude '*', 'META-INF/**'
-            }
-        }
-    }
-    from("LICENSE") {
-        rename { "${it}_${base.archivesName.get()}"}
-    }
-
-    // This is the preferred method to reobfuscate your jar file
+    archiveClassifier = 'slim'
     finalizedBy 'reobfJar'
 }
 
-//tasks.build.dependsOn shadowJar
+jarJar.enable()
+
+tasks.jarJar.finalizedBy('reobfJarJar')
+tasks.jarJar.archiveClassifier = ''
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }

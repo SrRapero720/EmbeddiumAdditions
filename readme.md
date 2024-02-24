@@ -1,29 +1,32 @@
-# MinecraftDevelopmentKit
-This MDK is only for MinecraftForge<br>
-Better documented MDK with more useful information than official MinecraftForge MDK
+[![Downloads](https://cf.way2muchnoise.eu/embeddiumplus.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/embeddiumplus)
+[![Available for](https://cf.way2muchnoise.eu/versions/embeddiumplus.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/embeddiumplus/files)
+[![Latest Version](https://img.shields.io/curseforge/v/931925?style=for-the-badge&label=curseforge&labelColor=%232d2d2d&color=%23e04e14&link=https%3A%2F%2Fwww.curseforge.com%2Fminecraft%2Fmc-mods%2Fwatermedia%2Ffiles)](https://www.curseforge.com/minecraft/mc-mods/embeddiumplus/files)
 
-## Includes
-- Mixins examples
-- Parchment mappings
-- Simple Java introduction
-- Shade dependencies (using shadow)
-  - Relocate
-  - Service merge
-- Classpath injection for game runs
-  - Using non-mod libraries now is possible
+[![Discord community](https://dcbadge.vercel.app/api/server/cuYAzzZ)](https://discord.gg/cuYAzzZ)
+[![Discord community](https://dcbadge.vercel.app/api/server/rN9Y7caguP)](https://discord.gg/rN9Y7caguP)
 
-## FAQ
-- This works for ``X`` mod version?
-  - Yes! this template works with 1.16.5 to 1.20.x and next versions
-- What Java version should I use?
-  - You can set latest JAVA version for gradle and other for game runs.
-  - Anyway you should use latest Java version (17 or 21).
-- Why not use jarInJar instead of shadow?
-  - Loading times. 3-4 seconds are worth it. Sometimes works other may nope
+# ![Embeddium++Additions Logo](https://cdn.discordapp.com/emojis/1206132400623718410.png?size=32&quality=lossless) | EMBEDDIUM++ADDITIONS
+Currently new source code is in development, everything was made from scraps.<br>
+Follow the changes and new features on [Discord](https://discord.gg/cuYAzzZ)
 
-## HAVE QUESTIONS?
-Join to my [Discord](https://discord.gg/cuYAzzZ) and ask whatever you want, that includes Java basics,
-i am not a trashcan to no answer a _basic java question_.
+### INTENDED FEATURES
+- [💡] **Dynamic Lights**
+- [💻] **Borderless FullScreen**
+- [🖥️] **Wide Screen support**
+- [👟] **Fast Models (Chests, Beds and Shulkers)**
+- [🔍] **Zoom Key (made in EA and Zume support)**
+- [🎛️] **Enhanced Video settings screen (with three styles)**
+- [🐄] **Entity Distance Culling**
+- [🕯️] **True Darkness**
+- [🧮] **FPS Display**
+- [👁️] **Hide JEI/REI/EMI**
+- [☁️] **Clear skies Features**
+  - [🌁] **Fog Toggle**
+  - [🌌] **Blue band Toggle**
+- [🅰️] **Font Shadows Toggle**
+- [💎] **Chunk Fade In**
+- [🌎] **Fast Language Reload**
+- [🕸️] **Fast Mipmap Reload**
 
-## MAINTAINERS
-- SrRapero720
+### SODIUM ONLY FEATURES
+- (secret)
