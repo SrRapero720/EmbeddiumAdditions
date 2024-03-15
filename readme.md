@@ -6,7 +6,7 @@
 [![Discord community](https://dcbadge.vercel.app/api/server/rN9Y7caguP)](https://discord.gg/rN9Y7caguP)
 
 # ![Embeddium++Additions Logo](https://cdn.discordapp.com/emojis/1206132400623718410.png?size=32&quality=lossless) | EMBEDDIUM++ADDITIONS
-Currently new source code is in development, everything was made from scraps.<br>
+Currently new source code is in development, everything was made from scratch.<br>
 Follow the changes and new features on [Discord](https://discord.gg/cuYAzzZ)
 
 ### INTENDED FEATURES
